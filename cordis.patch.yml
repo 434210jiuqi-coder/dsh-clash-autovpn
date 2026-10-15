@@ -1,0 +1,6 @@
+# dsh-clash-autovpn 的 bundle patch：把自己挂进 profile 的 loader 层栈。
+# 需要配置时，在 profile 的 cordis.patch.yml 里用**同 id + config** 覆盖（不要带 name/insert，
+# 否则会与这里撞成两条同 id 条目 → duplicate loader entry id → DSH 启动失败）。
+- insert:
+    - id: dsh-clash-autovpn
+      name: 'dsh-clash-autovpn'

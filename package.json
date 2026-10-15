@@ -1,0 +1,59 @@
+{
+  "name": "dsh-clash-autovpn",
+  "version": "0.2.0",
+  "description": "DSH 插件：联网失败时判定是否因墙，自动开启本机 Clash 代理（控制口自动发现、按地区优先自动选节点），用完自动关闭并逐项还原；VPN 流量超过预算（默认 1GB）时警告、暂停并向你询问。并向其它插件提供共享的 clashAutovpn 服务。",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "clash",
+    "mihomo",
+    "proxy",
+    "vpn",
+    "auto-proxy"
+  ],
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./manager": "./lib/manager.js",
+    "./package.json": "./package.json",
+    "./cordis.patch.yml": "./cordis.patch.yml"
+  },
+  "files": [
+    "lib",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node test/plugin-load.mjs",
+    "smoke": "node test/smoke.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "os": [
+    "win32"
+  ],
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.4",
+    "@deepseek-ai/dsh-tools": ">=0.2.0-rc.2"
+  },
+  "dsh": {
+    "manifestVersion": 1,
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "author": "434210jiuqi-coder",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/434210jiuqi-coder/dsh-clash-autovpn.git"
+  },
+  "homepage": "https://github.com/434210jiuqi-coder/dsh-clash-autovpn#readme",
+  "bugs": {
+    "url": "https://github.com/434210jiuqi-coder/dsh-clash-autovpn/issues"
+  }
+}

@@ -1,0 +1,15 @@
+# 依赖与本机运行时产物一律不入库
+node_modules/
+pnpm-lock.yaml
+
+# 日志与状态（真实运行时写在 ~/.dsh/clash-autovpn/，这里只防手滑）
+*.log
+state.json
+*.txt
+
+# 编辑器 / 系统
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini

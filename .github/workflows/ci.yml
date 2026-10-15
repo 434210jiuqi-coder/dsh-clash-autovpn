@@ -1,0 +1,38 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    # 插件是 Windows 向的（注册表 / 系统代理 / netstat / 任务计划），用 windows 跑最贴近真实
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ['20', '22']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: 语法检查
+        run: |
+          node --check lib/index.js
+          node --check lib/manager.js
+          node --check lib/clash.js
+          node --check lib/probe.js
+          node --check lib/egress.js
+          node --check lib/systemproxy.js
+          node --check lib/log.js
+
+      # 只有装载预检能进 CI：test/smoke.mjs 与 test/restore*.mjs 会真实开关本机 Clash 与系统代理，
+      # 只能在你自己机器上手动跑（见 README「自测」）。
+      - name: 装载预检（没有 DSH 环境时自动 SKIP）
+        run: node test/plugin-load.mjs
